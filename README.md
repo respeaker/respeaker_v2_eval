@@ -35,6 +35,13 @@ respeaker v2 评估板入坑指南
    ```
 7. 运行snowboy版alexa，代码在alexa目录
    ```
+   python ns_kws_doa_alexa.py
+   ```
+8. 加灯效，由于读写SPI需要root权限，所以先切到root用户
+   ```
+   sudo su
+   cp /home/respeaker/.avs.json /root/.avs.json    # 拷贝respeaker用户的alexa配置文件给root用户
+   source /home/respeaker/env/bin/activate         # 激活之前配置好的python虚拟环境
    python ns_kws_doa_alexa_with_light.py
    ```
 
