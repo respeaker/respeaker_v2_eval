@@ -9,13 +9,15 @@ except ImportError:
 
 
 class Pixels:
-    PIXELS_N = 3
+    PIXELS_N = 12
 
     def __init__(self):
         self.basis = [0] * 3 * self.PIXELS_N
-        self.basis[0] = 1
-        self.basis[4] = 1
-        self.basis[8] = 2
+        self.basis[0 * 3 + 0] = 2
+        self.basis[3 * 3 + 2] = 2
+        self.basis[6 * 3 + 1] = 1
+        self.basis[6 * 3 + 0] = 1
+        self.basis[9 * 3 + 1] = 2
 
         self.colors = [0] * 3 * self.PIXELS_N
         self.dev = apa102.APA102(num_led=self.PIXELS_N)

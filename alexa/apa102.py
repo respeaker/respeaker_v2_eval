@@ -156,8 +156,7 @@ class APA102:
         # Calculate pixel brightness as a percentage of the
         # defined global_brightness. Round up to nearest integer
         # as we expect some brightness unless set to 0
-        brightness = ceil(bright_percent*self.global_brightness/100.0)
-        brightness = int(brightness)
+        brightness = int(ceil(bright_percent*self.global_brightness/100.0))
 
         # LED startframe is three "1" bits, followed by 5 brightness bits
         ledstart = (brightness & 0b00011111) | self.LED_START
@@ -201,7 +200,10 @@ class APA102:
         self.clock_start_frame()
         # xfer2 kills the list, unfortunately. So it must be copied first
         # SPI takes up to 4096 Integers. So we are fine for up to 1024 LEDs.
-        self.spi.xfer2(list(self.leds))
+        data = list(self.leds)
+        while data:
+            self.spi.xfer2(data[:32])
+            data = data[32:]
         self.clock_end_frame()
 
 
