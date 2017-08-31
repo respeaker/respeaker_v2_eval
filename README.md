@@ -33,7 +33,10 @@ respeaker v2 评估板入坑指南
    source ~/env/bin/activate
    alexa-tap
    ```
-   
+7. 运行snowboy版alexa，代码在alexa目录
+   ```
+   python ns_kws_doa_alexa_with_light.py
+   ```
 
 ### Hard way
 1. 使用 `screen /dev/ttyACM0 115200` 或 `minicom -D /dev/ttyACM0 -b 115200` 通过串口登录系统
