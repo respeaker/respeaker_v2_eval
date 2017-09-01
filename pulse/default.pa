@@ -35,8 +35,8 @@ load-module module-switch-on-port-available
 ### Load audio drivers statically
 ### (it's probably better to not load these drivers manually, but instead
 ### use module-udev-detect -- see below -- for doing this automatically)
-load-module module-alsa-sink device=hw:0,2
-load-module module-alsa-source device=hw:0,0
+load-module module-alsa-sink device=playback
+load-module module-alsa-source device=capture channel_map=front-left,front-right,rear-left,rear-right,front-center,lfe,side-left,side-right
 #load-module module-oss device="/dev/dsp" sink_name=output source_name=input
 #load-module module-oss-mmap device="/dev/dsp" sink_name=output source_name=input
 #load-module module-null-sink

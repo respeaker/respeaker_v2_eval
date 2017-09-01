@@ -19,7 +19,7 @@ def main():
     logging.basicConfig(level=logging.DEBUG)
 
     src = Source(rate=16000)
-    kws = KWS()
+    kws = KWS(model='alexa')
     alexa = Alexa()
 
     alexa.state_listener.on_listening = pixels.listen

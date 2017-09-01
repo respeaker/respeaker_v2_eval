@@ -23,7 +23,7 @@ def main():
     src = Source(rate=16000, channels=8)
     ch1 = ChannelPicker(channels=8, pick=1)
     ns = NS(rate=16000, channels=1)
-    kws = KWS()
+    kws = KWS(model='alexa')
     doa = DOA(rate=16000)
     alexa = Alexa()
 
