@@ -1,5 +1,5 @@
 """
-Hands-free Voice Assistant with Snowboy and Alexa Voice Service. The wake-up keyword is "snowboy"
+Hands-free Voice Assistant with Snowboy and Alexa Voice Service. The wake-up keyword is "alexa"
 
 Requirement:
     sudo apt-get install python-numpy
@@ -13,7 +13,7 @@ from voice_engine.source import Source
 from voice_engine.channel_picker import ChannelPicker
 from voice_engine.kws import KWS
 from voice_engine.ns import NS
-from voice_engine.doa_respeaker_6p1_mic_array import DOA
+from doa_respeaker_v2_6mic_array import DOA
 from avs.alexa import Alexa
 
 
