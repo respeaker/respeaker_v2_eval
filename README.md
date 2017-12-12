@@ -40,7 +40,7 @@ respeaker v2 评估板入坑指南
    ```
    python ns_kws_doa_alexa.py
    ```
-8. 加灯效，由于读写SPI需要root权限，所以先切到root用户
+8. 加灯效
    ```
    python ns_kws_doa_alexa_with_light.py
    ```
