@@ -2,6 +2,12 @@
 import apa102
 import time
 import threading
+import mraa
+
+pixels_switch = mraa.Gpio(12)
+pixels_switch.dir(mraa.DIR_OUT)
+pixels_switch.write(0)
+
 try:
     import queue as Queue
 except ImportError:
@@ -28,6 +34,7 @@ class Pixels:
             self.pattern.wakeup(direction)
 
         self.put(f)
+
 
     def listen(self):
         self.put(self.pattern.listen)
@@ -79,3 +86,5 @@ if __name__ == '__main__':
 
     pixels.off()
     time.sleep(1)
+
+

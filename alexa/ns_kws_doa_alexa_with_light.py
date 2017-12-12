@@ -16,7 +16,7 @@ from voice_engine.kws import KWS
 from voice_engine.ns import NS
 from doa_respeaker_v2_6mic_array import DOA
 from avs.alexa import Alexa
-from pixels import pixels
+from pixels import pixels,pixels_switch
 
 
 def main():
@@ -60,3 +60,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    pixels_switch.write(1)
