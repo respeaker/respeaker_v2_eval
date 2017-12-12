@@ -10,7 +10,10 @@ respeaker v2 评估板入坑指南
    ```
    su respeaker && cd                              # 如果已经是respeaker用户，跳过这一步
    git clone https://github.com/respeaker/respeaker_v2_eval.git
-   cd respeaker_v2
+   cd respeaker_v2_eval
+   sudo cp pixel_ring_enabler.service /etc/systemd/system
+   sudo systemctl enable pixel_ring_enabler
+   sudo systemctl start pixel_ring_enabler
    sudo cp asound.conf /etc/                       # 配置ALSA
    sudo cp pulse/default.pa /etc/pulse/            # 配置pulseaudio
    cp pulse/client.conf ~/.config/pulse/
@@ -39,9 +42,6 @@ respeaker v2 评估板入坑指南
    ```
 8. 加灯效，由于读写SPI需要root权限，所以先切到root用户
    ```
-   sudo su
-   cp /home/respeaker/.avs.json /root/.avs.json    # 拷贝respeaker用户的alexa配置文件给root用户
-   source /home/respeaker/env/bin/activate         # 激活之前配置好的python虚拟环境
    python ns_kws_doa_alexa_with_light.py
    ```
 
