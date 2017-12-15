@@ -8,11 +8,12 @@ respeaker v2 评估板入坑指南
 2. 用Network Manager命令行工具nmtui联网 `sudo nmtui`
 3. 下载此仓库，更新配置，设置python虚拟环境，安装软件包
    ```
-   su respeaker                           # 切换到respeaker用户，如果已经是respeaker用户，跳过这一步
-   cd                                     # 切换到respeaker用户主目录/home/respeaker
-   pwd                                    # 确保在/home/respeaker目录
+   su respeaker && cd                              # 如果已经是respeaker用户，跳过这一步
    git clone https://github.com/respeaker/respeaker_v2_eval.git
-   cd respeaker_v2
+   cd respeaker_v2_eval
+   sudo cp pixel_ring_enabler.service /etc/systemd/system
+   sudo systemctl enable pixel_ring_enabler
+   sudo systemctl start pixel_ring_enabler
    sudo cp asound.conf /etc/                       # 配置ALSA
    sudo cp pulse/default.pa /etc/pulse/            # 配置pulseaudio
    cp pulse/client.conf ~/.config/pulse/
@@ -26,8 +27,6 @@ respeaker v2 评估板入坑指南
    sudo apt install libatlas-base-dev                         # 安装snowboy依赖包atlas
    pip install avs
    pip install voice-engine
-   sudo apt-get install gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly python-gi python-gst gir1.2-gstreamer-1.0
-   ./set_alsa_mixer.sh                                        # 设置 alsa 音量
    sudo ip addr                                               # 获取IP地址
    ```
 4. 用VNC登录系统，VNC地址是IP加端口号5901，比如`192.168.9.9:5901`，VNC客户端推荐使用 [VNC Viewer for Google Chrome](https://chrome.google.com/webstore/detail/vnc%C2%AE-viewer-for-google-ch/iabmpiboiopbgfabjmgeedhcmjenhbla?hl=en)
@@ -41,12 +40,8 @@ respeaker v2 评估板入坑指南
    ```
    python ns_kws_doa_alexa.py
    ```
-8. 加灯效，由于读写SPI需要root权限，所以先切到root用户
+8. 加灯效
    ```
-   sudo su
-   /home/respeaker/respeaker_v2_eval/enable_pixels.sh # 拉低 pixels 使能引脚
-   cp /home/respeaker/.avs.json /root/.avs.json       # 拷贝respeaker用户的alexa配置文件给root用户
-   source /home/respeaker/env/bin/activate            # 激活之前配置好的python虚拟环境
    python ns_kws_doa_alexa_with_light.py
    ```
 
@@ -65,7 +60,7 @@ respeaker v2 评估板入坑指南
    pcm.dmixed {
        type dmix
        slave.pcm "hw:0,2"
-       ipc_key 123456
+       ipc_key 1024
    }
    ```
 5. 修复一个PulseAudio配置问题，修改`/etc/pulse/default.pa`，禁用module-udev-detect和module-detect，静态加载alsa sink和source，修改之后用respeaker用户重启pulseaudio，运行`pulseaudio -k || pulseaudio -D`

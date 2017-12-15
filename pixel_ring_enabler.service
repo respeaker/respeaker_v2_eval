@@ -1,0 +1,13 @@
+# systemd service spec for pulseaudio running in system mode -- not recommended though!
+# on arch, put it under /etc/systemd/system/pulseaudio.service
+# start with: systemctl start pulseaudio.service
+# enable on boot: systemctl enable pulseaudio.service 
+[Unit]
+Description=Enable the ReSpeaker v2 pixel ring control pin
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mraa-gpio set 12 0
+
+[Install]
+WantedBy=multi-user.target
