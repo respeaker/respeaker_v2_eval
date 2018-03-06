@@ -16,11 +16,14 @@ from voice_engine.ns import NS
 from avs.alexa import Alexa
 from pixel_ring import pixel_ring
 import mraa
+import os
 
-# enable pixel ring
-pixel_ring_en = mraa.Gpio(12)
-pixel_ring_en.dir(mraa.DIR_OUT)
-pixel_ring_en.write(0)
+en = mraa.Gpio(12)
+if os.geteuid() != 0 :
+    time.sleep(1)
+ 
+en.dir(mraa.DIR_OUT)
+en.write(0)
 
 
 def main():
