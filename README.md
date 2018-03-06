@@ -21,7 +21,8 @@ respeaker v2入手
 6. 运行`~/.local/bin/alexa-tap`，log输出on_ready之后，即可按Enter开始语音对话
 7. 运行snowboy版hands-free alexa
    ```
-   sudo apt install libatlas-dev                # required by snowboy
+   sudo apt update
+   sudo apt install libatlas-base-dev                # required by snowboy
    pip install --no-deps snowboy*.whl          # install pre-build snowboy
    pip install webrtc_audio_processing*.whl
    pip install voice-engine
