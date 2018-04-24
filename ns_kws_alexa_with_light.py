@@ -7,6 +7,8 @@ Requirement:
 """
 
 
+import os
+import signal
 import time
 import logging
 from voice_engine.source import Source
@@ -16,7 +18,7 @@ from voice_engine.ns import NS
 from avs.alexa import Alexa
 from pixel_ring import pixel_ring
 import mraa
-import os
+
 
 en = mraa.Gpio(12)
 if os.geteuid() != 0 :
@@ -47,14 +49,18 @@ def main():
 
     kws.set_callback(on_detected)
 
-    src.pipeline_start()
+    is_quit = []
+    def signal_handler(signal, frame):
+        is_quit.append(True)
+        print('Quit')
+    signal.signal(signal.SIGINT, signal_handler)
 
-    while True:
+    src.pipeline_start()
+    while not is_quit:
         try:
             time.sleep(1)
         except KeyboardInterrupt:
             break
-
     src.pipeline_stop()
 
 
